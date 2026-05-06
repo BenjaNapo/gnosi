@@ -22,5 +22,15 @@ test.describe('Frontend', () => {
 
     await page.mouse.wheel(0, 600)
     await expect(heading).toHaveText('Il Cerchio')
+    await page.waitForTimeout(450)
+
+    await page.mouse.wheel(0, 600)
+    await expect(heading).toHaveText('La Luce')
+
+    const finalDimensions = await page.evaluate(() => ({
+      scrollHeight: document.documentElement.scrollHeight,
+      viewportHeight: window.innerHeight,
+    }))
+    expect(finalDimensions.scrollHeight).toBeLessThanOrEqual(finalDimensions.viewportHeight + 1)
   })
 })

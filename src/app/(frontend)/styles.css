@@ -46,6 +46,11 @@ main {
 }
 
 .home-page {
+  --sigil-core-color: var(--vermilion);
+  --sigil-core-glow-inner: rgba(189, 47, 39, 0.58);
+  --sigil-core-glow-outer: rgba(189, 47, 39, 0.24);
+  --sigil-core-scale: 1;
+
   position: relative;
   display: flex;
   flex-direction: column;
@@ -60,6 +65,9 @@ main {
     linear-gradient(90deg, rgba(242, 246, 242, 0.92) 0%, transparent 42%),
     radial-gradient(circle at 76% 46%, rgba(74, 130, 124, 0.12), transparent 32%),
     linear-gradient(112deg, #fbfaf4 0%, #f8f2e7 52%, #f1f5f1 100%);
+  transition:
+    background 720ms ease,
+    color 720ms ease;
 }
 
 .home-page::before {
@@ -72,6 +80,7 @@ main {
       29px 31px;
   content: "";
   opacity: 0.5;
+  transition: opacity 720ms ease;
 }
 
 .home-page::after {
@@ -80,6 +89,9 @@ main {
   pointer-events: none;
   border: 1px solid rgba(164, 119, 49, 0.28);
   content: "";
+  transition:
+    border-color 720ms ease,
+    opacity 720ms ease;
 }
 
 .site-nav {
@@ -94,6 +106,7 @@ main {
   margin: 0 auto;
   padding: 30px 0 24px;
   border-bottom: 1px solid rgba(164, 119, 49, 0.2);
+  transition: border-color 720ms ease;
 }
 
 .brand-mark {
@@ -108,6 +121,10 @@ main {
   line-height: 1;
   background: rgba(255, 255, 255, 0.56);
   box-shadow: 0 10px 30px rgba(45, 42, 37, 0.07);
+  transition:
+    background-color 720ms ease,
+    border-color 720ms ease,
+    box-shadow 720ms ease;
 }
 
 .brand-mark span {
@@ -128,6 +145,10 @@ main {
   text-transform: uppercase;
   background: rgba(255, 255, 255, 0.48);
   box-shadow: 0 18px 38px rgba(45, 42, 37, 0.05);
+  transition:
+    background-color 720ms ease,
+    border-color 720ms ease,
+    box-shadow 720ms ease;
 }
 
 .nav-links a {
@@ -209,6 +230,7 @@ main {
   letter-spacing: 0.18em;
   line-height: 1;
   text-transform: uppercase;
+  transition: color 720ms ease;
 }
 
 .hero-kicker::before {
@@ -227,6 +249,7 @@ main {
   font-weight: 400;
   line-height: 0.86;
   letter-spacing: 0;
+  transition: color 720ms ease;
 }
 
 .hero-copy > p:not(.hero-kicker) {
@@ -238,6 +261,7 @@ main {
   font-weight: 400;
   line-height: 1.24;
   letter-spacing: 0;
+  transition: color 720ms ease;
 }
 
 .hero-rule {
@@ -246,7 +270,9 @@ main {
   margin-top: clamp(30px, 5vh, 58px);
   background: linear-gradient(90deg, var(--vermilion), rgba(164, 119, 49, 0.74), transparent);
   transform-origin: left center;
-  transition: transform 520ms ease;
+  transition:
+    background 720ms ease,
+    transform 520ms ease;
 }
 
 .sigil-column {
@@ -282,6 +308,13 @@ main {
   border-color: rgba(74, 130, 124, 0.22);
 }
 
+.sigil-stage::before,
+.sigil-stage::after {
+  transition:
+    border-color 720ms ease,
+    opacity 720ms ease;
+}
+
 .essence-sigil {
   position: relative;
   z-index: 1;
@@ -309,6 +342,13 @@ main {
 .essence-sigil::after {
   top: 66%;
   height: 9%;
+}
+
+.essence-sigil::before,
+.essence-sigil::after {
+  transition:
+    background-color 720ms ease,
+    opacity 720ms ease;
 }
 
 .sigil-circle,
@@ -371,14 +411,18 @@ main {
   min-width: 14px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: var(--vermilion);
+  background: var(--sigil-core-color);
   box-shadow:
-    0 0 18px rgba(189, 47, 39, 0.58),
-    0 0 48px rgba(189, 47, 39, 0.24);
-  transform: translate(-50%, -50%);
+    0 0 18px var(--sigil-core-glow-inner),
+    0 0 48px var(--sigil-core-glow-outer);
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(var(--sigil-core-scale));
   transition:
+    background-color 720ms ease,
+    box-shadow 720ms ease,
+    opacity 360ms ease,
     top 620ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .home-page[data-active-shape="square"] {
@@ -391,6 +435,72 @@ main {
 
 .home-page[data-active-shape="circle"] {
   --sigil-core-y: 15%;
+}
+
+.home-page[data-active-shape="burst"] {
+  --sigil-core-color: #fffef8;
+  --sigil-core-glow-inner: rgba(255, 255, 255, 0.92);
+  --sigil-core-glow-outer: rgba(255, 255, 255, 0.74);
+  --sigil-core-scale: 1;
+  --sigil-core-y: 15%;
+
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.72) 0 1px, transparent 1px 100%) 9.5% 0 /
+      1px 100% no-repeat,
+    radial-gradient(circle at 74% 25%, rgba(255, 255, 255, 0.96), transparent 34%),
+    linear-gradient(112deg, #ffffff 0%, #fffef8 48%, #f9fff9 100%);
+}
+
+.home-page[data-active-shape="burst"]::before {
+  opacity: 0.12;
+}
+
+.home-page[data-active-shape="burst"]::after {
+  border-color: rgba(255, 255, 255, 0.56);
+  opacity: 0.68;
+}
+
+.home-page[data-active-shape="burst"] .site-nav {
+  border-color: rgba(164, 119, 49, 0.1);
+}
+
+.home-page[data-active-shape="burst"] .brand-mark,
+.home-page[data-active-shape="burst"] .nav-links {
+  border-color: rgba(164, 119, 49, 0.12);
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 18px 44px rgba(45, 42, 37, 0.035);
+}
+
+.home-page[data-active-shape="burst"] .hero-kicker {
+  color: #946828;
+}
+
+.home-page[data-active-shape="burst"] .hero :is(h1, h2) {
+  color: #1f1d1a;
+}
+
+.home-page[data-active-shape="burst"] .hero-copy > p:not(.hero-kicker) {
+  color: #454039;
+}
+
+.home-page[data-active-shape="burst"] .hero-rule {
+  background: linear-gradient(90deg, rgba(189, 47, 39, 0.48), rgba(164, 119, 49, 0.42), transparent);
+}
+
+.home-page[data-active-shape="burst"] .sigil-stage::before,
+.home-page[data-active-shape="burst"] .sigil-stage::after {
+  border-color: rgba(255, 255, 255, 0.74);
+  opacity: 0.52;
+}
+
+.home-page[data-active-shape="burst"] .essence-sigil::before,
+.home-page[data-active-shape="burst"] .essence-sigil::after {
+  background: rgba(255, 255, 255, 0.7);
+  opacity: 0.46;
+}
+
+.home-page[data-active-shape="burst"] .sigil-core {
+  animation: sigil-core-burst 1200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes sigil-breathe {
@@ -406,12 +516,33 @@ main {
   }
 }
 
+@keyframes sigil-core-burst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  42% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(190);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(210);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .essence-sigil,
   .hero-rule,
   .sigil-core {
     animation: none;
     transition: none;
+  }
+
+  .home-page[data-active-shape="burst"] .sigil-core {
+    opacity: 0;
   }
 }
 

@@ -25,6 +25,12 @@ const fragments = [
     text: "Quando il percorso si compie, il segno torna intero. Il cerchio non chiude: contiene, protegge e lascia risuonare cio che e stato riconosciuto.",
     title: 'Il Cerchio',
   },
+  {
+    kicker: 'Frammento quarto',
+    shape: 'burst',
+    text: "Nel punto che si apre, la forma non resiste piu. La luce attraversa ogni margine, rischiara la pagina e restituisce al bianco cio che era velato.",
+    title: 'La Luce',
+  },
 ] as const
 
 const wheelThreshold = 22
