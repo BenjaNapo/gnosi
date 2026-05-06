@@ -1,59 +1,123 @@
-import { headers as getHeaders } from 'next/headers.js'
-import Image from 'next/image'
-import { getPayload } from 'payload'
-import React from 'react'
-import { fileURLToPath } from 'url'
+'use client'
 
-import config from '@/payload.config'
-import './styles.css'
+import { useEffect, useRef, useState } from 'react'
 
-export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
+const navItems = ['Home', 'Gnosi', 'Le Sedi', 'Contatti']
 
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
+const fragments = [
+  {
+    kicker: 'Frammento primo',
+    shape: 'square',
+    text: "La conoscenza non si conquista: si ricorda. Nel silenzio della forma, il punto interiore si accende e orienta l'ascesa dalla materia allo spirito.",
+    title: "L'Essenza",
+  },
+  {
+    kicker: 'Frammento secondo',
+    shape: 'triangle',
+    text: "La forma custodisce il movimento. Ogni lato apre una direzione, ogni vertice raccoglie cio che era disperso e lo conduce verso un centro piu sottile.",
+    title: 'La Forma',
+  },
+  {
+    kicker: 'Frammento terzo',
+    shape: 'circle',
+    text: "Quando il percorso si compie, il segno torna intero. Il cerchio non chiude: contiene, protegge e lascia risuonare cio che e stato riconosciuto.",
+    title: 'Il Cerchio',
+  },
+] as const
+
+export default function HomePage() {
+  const panelRefs = useRef<Array<HTMLElement | null>>([])
+  const [activeFragment, setActiveFragment] = useState(0)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const strongestEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+
+        if (!strongestEntry) {
+          return
+        }
+
+        const nextIndex = Number((strongestEntry.target as HTMLElement).dataset.fragmentIndex)
+
+        if (Number.isFinite(nextIndex)) {
+          setActiveFragment(nextIndex)
+        }
+      },
+      {
+        rootMargin: '-24% 0px -34%',
+        threshold: [0.35, 0.5, 0.65, 0.8],
+      },
+    )
+
+    panelRefs.current.forEach((panel) => {
+      if (panel) {
+        observer.observe(panel)
+      }
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const activeShape = fragments[activeFragment].shape
 
   return (
-    <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/3.x/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/3.x/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
+    <div className="home-page" data-active-shape={activeShape}>
+      <nav className="site-nav" aria-label="Navigazione principale">
+        <a className="brand-mark" href="#" aria-label="Gnosi home">
+          <span>G</span>
         </a>
-      </div>
+
+        <div className="nav-links">
+          {navItems.map((item) => (
+            <a aria-current={item === 'Home' ? 'page' : undefined} href="#" key={item}>
+              {item}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <section className="story" aria-label="Percorso gnostico">
+        <div className="sigil-column" aria-hidden="true">
+          <div className="sigil-stage">
+            <div className="essence-sigil">
+              <span className="sigil-circle" />
+              <span className="sigil-triangle" />
+              <span className="sigil-square" />
+              <span className="sigil-core" />
+            </div>
+          </div>
+        </div>
+
+        <div className="story-copy-stack">
+          {fragments.map((fragment, index) => {
+            const titleId = `fragment-title-${index}`
+            const TitleTag = index === 0 ? 'h1' : 'h2'
+
+            return (
+              <article
+                className="hero"
+                data-active={index === activeFragment ? 'true' : undefined}
+                data-fragment-index={index}
+                key={fragment.title}
+                ref={(node) => {
+                  panelRefs.current[index] = node
+                }}
+                aria-labelledby={titleId}
+              >
+                <div className="hero-copy">
+                  <p className="hero-kicker">{fragment.kicker}</p>
+                  <TitleTag id={titleId}>{fragment.title}</TitleTag>
+                  <p>{fragment.text}</p>
+                  <div className="hero-rule" aria-hidden="true" />
+                </div>
+              </article>
+            )
+          })}
+        </div>
+      </section>
     </div>
   )
 }
