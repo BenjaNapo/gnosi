@@ -1,6 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
+import type { TouchEvent } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 const navItems = ['Home', 'Gnosi', 'Le Sedi', 'Contatti']
 
@@ -25,46 +27,170 @@ const fragments = [
   },
 ] as const
 
+const wheelThreshold = 22
+const touchThreshold = 42
+
 export default function HomePage() {
-  const panelRefs = useRef<Array<HTMLElement | null>>([])
+  const copyRef = useRef<HTMLDivElement | null>(null)
+  const activeFragmentRef = useRef(0)
+  const isAnimatingRef = useRef(false)
+  const prefersReducedMotionRef = useRef(false)
+  const shouldAnimateInRef = useRef(false)
+  const touchStartYRef = useRef<number | null>(null)
+  const transitionTweenRef = useRef<gsap.core.Tween | null>(null)
   const [activeFragment, setActiveFragment] = useState(0)
+  const fragment = fragments[activeFragment]
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const strongestEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const syncMotionPreference = () => {
+      prefersReducedMotionRef.current = mediaQuery.matches
+    }
 
-        if (!strongestEntry) {
-          return
-        }
+    syncMotionPreference()
+    mediaQuery.addEventListener('change', syncMotionPreference)
 
-        const nextIndex = Number((strongestEntry.target as HTMLElement).dataset.fragmentIndex)
-
-        if (Number.isFinite(nextIndex)) {
-          setActiveFragment(nextIndex)
-        }
-      },
-      {
-        rootMargin: '-24% 0px -34%',
-        threshold: [0.35, 0.5, 0.65, 0.8],
-      },
-    )
-
-    panelRefs.current.forEach((panel) => {
-      if (panel) {
-        observer.observe(panel)
-      }
-    })
-
-    return () => observer.disconnect()
+    return () => mediaQuery.removeEventListener('change', syncMotionPreference)
   }, [])
 
-  const activeShape = fragments[activeFragment].shape
+  const setFragment = useCallback((nextIndex: number) => {
+    const boundedIndex = Math.max(0, Math.min(fragments.length - 1, nextIndex))
+
+    if (boundedIndex === activeFragmentRef.current || isAnimatingRef.current) {
+      return
+    }
+
+    const copy = copyRef.current
+    activeFragmentRef.current = boundedIndex
+
+    if (prefersReducedMotionRef.current || !copy) {
+      setActiveFragment(boundedIndex)
+      return
+    }
+
+    isAnimatingRef.current = true
+    gsap.killTweensOf(copy)
+    transitionTweenRef.current = gsap.to(copy, {
+      autoAlpha: 0,
+      duration: 0.24,
+      ease: 'power2.out',
+      onComplete: () => {
+        shouldAnimateInRef.current = true
+        setActiveFragment(boundedIndex)
+      },
+    })
+  }, [])
+
+  const moveFragment = useCallback(
+    (direction: 1 | -1) => {
+      setFragment(activeFragmentRef.current + direction)
+    },
+    [setFragment],
+  )
+
+  useEffect(() => {
+    if (!shouldAnimateInRef.current) {
+      return
+    }
+
+    const copy = copyRef.current
+    shouldAnimateInRef.current = false
+
+    if (!copy) {
+      isAnimatingRef.current = false
+      return
+    }
+
+    transitionTweenRef.current = gsap.fromTo(
+      copy,
+      { autoAlpha: 0 },
+      {
+        autoAlpha: 1,
+        duration: 0.36,
+        ease: 'power2.out',
+        onComplete: () => {
+          isAnimatingRef.current = false
+        },
+      },
+    )
+  }, [activeFragment])
+
+  useEffect(() => {
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault()
+
+      if (Math.abs(event.deltaY) < wheelThreshold) {
+        return
+      }
+
+      moveFragment(event.deltaY > 0 ? 1 : -1)
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowDown' || event.key === 'PageDown') {
+        event.preventDefault()
+        moveFragment(1)
+      }
+
+      if (event.key === 'ArrowUp' || event.key === 'PageUp') {
+        event.preventDefault()
+        moveFragment(-1)
+      }
+    }
+
+    window.addEventListener('wheel', handleWheel, { passive: false })
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [moveFragment])
+
+  useEffect(() => {
+    return () => {
+      transitionTweenRef.current?.kill()
+    }
+  }, [])
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    touchStartYRef.current = event.touches[0]?.clientY ?? null
+  }
+
+  const handleTouchMove = (event: TouchEvent<HTMLDivElement>) => {
+    if (touchStartYRef.current !== null) {
+      event.preventDefault()
+    }
+  }
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    const startY = touchStartYRef.current
+    const endY = event.changedTouches[0]?.clientY
+    touchStartYRef.current = null
+
+    if (startY === null || endY === undefined) {
+      return
+    }
+
+    const deltaY = startY - endY
+
+    if (Math.abs(deltaY) < touchThreshold) {
+      return
+    }
+
+    moveFragment(deltaY > 0 ? 1 : -1)
+  }
+
+  const activeShape = fragment.shape
 
   return (
-    <div className="home-page" data-active-shape={activeShape}>
+    <div
+      className="home-page"
+      data-active-shape={activeShape}
+      onTouchEnd={handleTouchEnd}
+      onTouchMove={handleTouchMove}
+      onTouchStart={handleTouchStart}
+    >
       <nav className="site-nav" aria-label="Navigazione principale">
         <a className="brand-mark" href="#" aria-label="Gnosi home">
           <span>G</span>
@@ -91,32 +217,14 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="story-copy-stack">
-          {fragments.map((fragment, index) => {
-            const titleId = `fragment-title-${index}`
-            const TitleTag = index === 0 ? 'h1' : 'h2'
-
-            return (
-              <article
-                className="hero"
-                data-active={index === activeFragment ? 'true' : undefined}
-                data-fragment-index={index}
-                key={fragment.title}
-                ref={(node) => {
-                  panelRefs.current[index] = node
-                }}
-                aria-labelledby={titleId}
-              >
-                <div className="hero-copy">
-                  <p className="hero-kicker">{fragment.kicker}</p>
-                  <TitleTag id={titleId}>{fragment.title}</TitleTag>
-                  <p>{fragment.text}</p>
-                  <div className="hero-rule" aria-hidden="true" />
-                </div>
-              </article>
-            )
-          })}
-        </div>
+        <article className="hero" aria-labelledby="fragment-title">
+          <div className="hero-copy" ref={copyRef} aria-live="polite">
+            <p className="hero-kicker">{fragment.kicker}</p>
+            <h1 id="fragment-title">{fragment.title}</h1>
+            <p>{fragment.text}</p>
+            <div className="hero-rule" aria-hidden="true" />
+          </div>
+        </article>
       </section>
     </div>
   )
