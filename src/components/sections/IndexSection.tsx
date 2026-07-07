@@ -3,6 +3,8 @@
 import type { ReactNode } from 'react'
 import { useState } from 'react'
 
+import { cx, formatSectionNumber } from './sectionUtils'
+
 export type IndexSectionItem = {
   description?: ReactNode
   href?: string
@@ -34,7 +36,7 @@ const getBoundedIndex = (index: number | undefined, itemCount: number) => {
 }
 
 const getItemClassName = (isActive: boolean) =>
-  ['index-section__item', isActive && 'index-section__item--active'].filter(Boolean).join(' ')
+  cx('index-section__item', isActive && 'index-section__item--active')
 
 export function IndexSection({
   activeIndex,
@@ -48,7 +50,7 @@ export function IndexSection({
   const isControlled = typeof activeIndex === 'number'
   const currentIndex = getBoundedIndex(isControlled ? activeIndex : hoveredIndex, items.length)
   const activeItem = currentIndex >= 0 ? items[currentIndex] : undefined
-  const sectionClassName = ['index-section', className].filter(Boolean).join(' ')
+  const sectionClassName = cx('index-section', className)
 
   const activateItem = (index: number) => {
     if (!isControlled) {
@@ -70,7 +72,7 @@ export function IndexSection({
           <ol className="index-section__list">
             {items.map((item, index) => {
               const isActive = index === currentIndex
-              const itemNumber = item.number ?? String(index + 1).padStart(2, '0')
+              const itemNumber = item.number ?? formatSectionNumber(index)
               const commonProps = {
                 'aria-current': isActive ? ('true' as const) : undefined,
                 className: getItemClassName(isActive),
@@ -110,7 +112,7 @@ export function IndexSection({
           {activeItem && (
             <aside className="index-section__aside">
               <div className="index-section__symbol" aria-hidden="true">
-                {activeItem.symbol ?? activeItem.number ?? String(currentIndex + 1).padStart(2, '0')}
+                {activeItem.symbol ?? activeItem.number ?? formatSectionNumber(currentIndex)}
               </div>
               <div className="index-section__aside-copy">
                 {activeItem.meta && <p className="index-section__aside-meta">{activeItem.meta}</p>}

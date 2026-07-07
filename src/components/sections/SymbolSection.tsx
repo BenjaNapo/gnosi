@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 
+import { cx, SectionMeta } from './sectionUtils'
+
 export type SymbolSectionVariant = 'ascent' | 'empty' | 'essence' | 'threshold'
 export type SymbolSectionPosition = 'left' | 'right'
 
@@ -63,7 +65,7 @@ export function SymbolSection({
   symbolVariant = 'essence',
   title,
 }: SymbolSectionProps) {
-  const sectionClassName = ['symbol-section', className].filter(Boolean).join(' ')
+  const sectionClassName = cx('symbol-section', className)
   const defaultSymbol = renderSymbol(symbolVariant)
   const hasSymbol = Boolean(defaultSymbol || children)
 
@@ -75,12 +77,7 @@ export function SymbolSection({
     >
       <div className="symbol-section__inner">
         <article className="symbol-section__copy">
-          {(eyebrow || fragmentNumber) && (
-            <div className="symbol-section__meta">
-              {fragmentNumber && <span className="symbol-section__number">{fragmentNumber}</span>}
-              {eyebrow && <p className="symbol-section__eyebrow">{eyebrow}</p>}
-            </div>
-          )}
+          <SectionMeta eyebrow={eyebrow} fragmentNumber={fragmentNumber} prefix="symbol-section" />
 
           {title && <h2 className="symbol-section__title">{title}</h2>}
           {body && <div className="symbol-section__body">{body}</div>}

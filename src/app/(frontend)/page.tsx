@@ -1,10 +1,17 @@
 'use client'
 
 import gsap from 'gsap'
+import Link from 'next/link'
 import type { TouchEvent } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-const navItems = ['Home', "L'Insegnamento", 'Il Maestro', 'La Scuola', 'Contatti']
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/insegnamento', label: "L'Insegnamento" },
+  { href: '#', label: 'Il Maestro' },
+  { href: '#', label: 'La Scuola' },
+  { href: '#', label: 'Contatti' },
+]
 
 const fragments = [
   {
@@ -198,15 +205,19 @@ export default function HomePage() {
       onTouchStart={handleTouchStart}
     >
       <nav className="site-nav" aria-label="Navigazione principale">
-        <a className="brand-mark" href="#" aria-label="Gnosi home">
+        <Link className="brand-mark" href="/" aria-label="Gnosi home">
           <span>G</span>
-        </a>
+        </Link>
 
         <div className="nav-links">
           {navItems.map((item) => (
-            <a aria-current={item === 'Home' ? 'page' : undefined} href="#" key={item}>
-              {item}
-            </a>
+            <Link
+              aria-current={item.label === 'Home' ? 'page' : undefined}
+              href={item.href}
+              key={item.label}
+            >
+              {item.label}
+            </Link>
           ))}
         </div>
       </nav>

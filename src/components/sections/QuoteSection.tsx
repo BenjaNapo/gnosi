@@ -1,5 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react'
 
+import { cx, SectionMeta } from './sectionUtils'
+
 export type QuoteSectionAlign = 'left' | 'center' | 'right'
 
 export type QuoteSectionProps = {
@@ -23,18 +25,13 @@ export function QuoteSection({
   showLines = true,
   source,
 }: QuoteSectionProps) {
-  const sectionClassName = ['quote-section', className].filter(Boolean).join(' ')
+  const sectionClassName = cx('quote-section', className)
   const style = maxWidth ? ({ '--quote-section-max-width': maxWidth } as CSSProperties) : undefined
 
   return (
     <section className={sectionClassName} data-align={align} data-show-lines={showLines} style={style}>
       <div className="quote-section__inner">
-        {(eyebrow || fragmentNumber) && (
-          <div className="quote-section__meta">
-            {fragmentNumber && <span className="quote-section__number">{fragmentNumber}</span>}
-            {eyebrow && <p className="quote-section__eyebrow">{eyebrow}</p>}
-          </div>
-        )}
+        <SectionMeta eyebrow={eyebrow} fragmentNumber={fragmentNumber} prefix="quote-section" />
 
         <figure className="quote-section__figure">
           <blockquote className="quote-section__quote">{quote}</blockquote>

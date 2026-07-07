@@ -1,5 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react'
 
+import { cx } from './sectionUtils'
+
 export type ChapterGridChapter = {
   description?: ReactNode
   disabled?: boolean
@@ -30,7 +32,7 @@ export function ChapterGrid({
   intro,
   title,
 }: ChapterGridProps) {
-  const sectionClassName = ['chapter-grid', className].filter(Boolean).join(' ')
+  const sectionClassName = cx('chapter-grid', className)
   const gridStyle: ChapterGridStyle = {
     '--chapter-grid-columns': columns,
   }
@@ -49,12 +51,10 @@ export function ChapterGrid({
         <div className="chapter-grid__list" style={gridStyle}>
           {chapters.map((chapter, index) => {
             const isDisabled = chapter.disabled || !chapter.href
-            const chapterClassName = [
+            const chapterClassName = cx(
               'chapter-grid__item',
               isDisabled && 'chapter-grid__item--disabled',
-            ]
-              .filter(Boolean)
-              .join(' ')
+            )
             const content = (
               <>
                 <div className="chapter-grid__item-head">

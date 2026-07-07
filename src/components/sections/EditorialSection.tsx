@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 
+import { cx, SectionMeta } from './sectionUtils'
+
 export type EditorialSectionAlign = 'left' | 'center' | 'split'
 
 export type EditorialSectionProps = {
@@ -33,20 +35,17 @@ export function EditorialSection({
   secondaryBody,
   title,
 }: EditorialSectionProps) {
-  const sectionClassName = ['editorial-section', className].filter(Boolean).join(' ')
+  const sectionClassName = cx('editorial-section', className)
 
   return (
     <section className={sectionClassName} data-align={align}>
       <div className="editorial-section__inner">
         <header className="editorial-section__header">
-          {(eyebrow || fragmentNumber) && (
-            <div className="editorial-section__meta">
-              {fragmentNumber && (
-                <span className="editorial-section__number">{fragmentNumber}</span>
-              )}
-              {eyebrow && <p className="editorial-section__eyebrow">{eyebrow}</p>}
-            </div>
-          )}
+          <SectionMeta
+            eyebrow={eyebrow}
+            fragmentNumber={fragmentNumber}
+            prefix="editorial-section"
+          />
 
           {title && <h2 className="editorial-section__title">{title}</h2>}
         </header>

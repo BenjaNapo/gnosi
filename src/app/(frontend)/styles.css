@@ -51,6 +51,27 @@ main {
   min-height: 0;
 }
 
+.teaching-page {
+  min-height: 100svh;
+  height: 100svh;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  background: var(--paper);
+}
+
+.teaching-page__nav {
+  position: sticky;
+  top: 0;
+  background: rgba(251, 250, 244, 0.86);
+  backdrop-filter: blur(18px);
+}
+
+.teaching-page__hero {
+  min-height: calc(100svh - 116px);
+  display: grid;
+  align-items: center;
+}
+
 .home-page {
   --sigil-core-color: var(--vermilion);
   --sigil-core-glow-inner: rgba(189, 47, 39, 0.58);
