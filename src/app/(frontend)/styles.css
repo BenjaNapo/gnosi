@@ -1108,8 +1108,7 @@ main {
   aspect-ratio: 1;
   border: 1px solid rgba(17, 15, 13, 0.86);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 34%),
-    rgba(6, 6, 5, 0.96);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 34%), rgba(6, 6, 5, 0.96);
   box-shadow:
     0 0 0 1px rgba(164, 119, 49, 0.18),
     inset 0 0 34px rgba(0, 0, 0, 0.55);
@@ -1689,6 +1688,592 @@ a.chapter-grid__item:focus-visible::after {
   margin-bottom: 0;
 }
 
+.image-mosaic-section,
+.school-locations,
+.school-pathway,
+.school-evening {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(84px, 12vw, 168px) 0;
+  color: var(--ink);
+  background:
+    linear-gradient(90deg, rgba(189, 47, 39, 0.14) 0 1px, transparent 1px 100%) 9.5% 0 / 1px 100%
+      no-repeat,
+    linear-gradient(112deg, var(--paper) 0%, #f8f2e7 54%, var(--paper-soft) 100%);
+}
+
+.image-mosaic-section::before,
+.school-locations::before,
+.school-pathway::before,
+.school-evening::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(45, 42, 37, 0.018) 0 1px, transparent 1px 7px),
+    radial-gradient(circle, rgba(164, 119, 49, 0.13) 0 1px, transparent 1.5px) 12px 16px / 29px 31px;
+  content: '';
+  opacity: 0.4;
+}
+
+.image-mosaic-section::after,
+.school-locations::after,
+.school-pathway::after,
+.school-evening::after {
+  position: absolute;
+  top: clamp(24px, 4vw, 48px);
+  right: clamp(24px, 4vw, 48px);
+  bottom: clamp(24px, 4vw, 48px);
+  left: clamp(24px, 4vw, 48px);
+  pointer-events: none;
+  border: 1px solid rgba(164, 119, 49, 0.22);
+  content: '';
+}
+
+.image-mosaic-section__inner,
+.school-locations__inner,
+.school-pathway__inner,
+.school-evening__inner {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 72px, 1540px);
+  margin: 0 auto;
+}
+
+.image-mosaic-section__header {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(320px, 0.62fr);
+  gap: clamp(48px, 7vw, 120px);
+  align-items: end;
+  margin-bottom: clamp(48px, 6vw, 86px);
+}
+
+.image-mosaic-section__header::after {
+  grid-column: 1 / -1;
+  width: min(100%, 620px);
+  height: 1px;
+  background: linear-gradient(90deg, var(--vermilion), rgba(164, 119, 49, 0.68), transparent);
+  content: '';
+}
+
+.image-mosaic-section__meta {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 -18px;
+  color: var(--gold);
+}
+
+.image-mosaic-section__number {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  aspect-ratio: 1;
+  border: 1px solid rgba(164, 119, 49, 0.46);
+  color: var(--ink);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-size: 18px;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.image-mosaic-section__eyebrow,
+.school-locations__eyebrow,
+.school-pathway__eyebrow,
+.school-evening__eyebrow {
+  margin: 0;
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.image-mosaic-section__title,
+.school-locations__title,
+.school-pathway__title,
+.school-evening__title {
+  max-width: 880px;
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-size: clamp(58px, 8vw, 124px);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: 0;
+}
+
+.image-mosaic-section__intro {
+  max-width: 680px;
+  color: var(--ink-soft);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-size: clamp(24px, 2.6vw, 38px);
+  line-height: 1.22;
+}
+
+.image-mosaic-section__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.98fr) minmax(280px, 0.52fr);
+  grid-auto-flow: dense;
+  gap: clamp(18px, 2.2vw, 34px);
+}
+
+.image-mosaic-section__item {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+}
+
+.image-mosaic-section__item[data-variant='large'] {
+  grid-row: span 2;
+}
+
+.image-mosaic-section__image {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(280px, 34vw, 620px);
+  overflow: hidden;
+  border: 1px solid rgba(164, 119, 49, 0.28);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.34), transparent 36%),
+    repeating-linear-gradient(90deg, rgba(45, 42, 37, 0.045) 0 1px, transparent 1px 18px),
+    rgba(231, 223, 207, 0.42);
+  background-position: center;
+  background-size: cover;
+}
+
+.image-mosaic-section__item[data-variant='tall'] .image-mosaic-section__image {
+  min-height: clamp(260px, 24vw, 420px);
+}
+
+.image-mosaic-section__item[data-variant='wide'] .image-mosaic-section__image {
+  min-height: clamp(220px, 20vw, 340px);
+}
+
+.image-mosaic-section__image::before,
+.image-mosaic-section__image::after {
+  position: absolute;
+  inset: clamp(18px, 2.6vw, 42px);
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  content: '';
+}
+
+.image-mosaic-section__image::after {
+  inset: clamp(34px, 4.2vw, 72px);
+  border-color: rgba(164, 119, 49, 0.24);
+}
+
+.image-mosaic-section__item[data-tone='teal'] .image-mosaic-section__image {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.32), transparent 36%),
+    repeating-linear-gradient(0deg, rgba(74, 130, 124, 0.09) 0 1px, transparent 1px 18px),
+    rgba(242, 246, 242, 0.68);
+}
+
+.image-mosaic-section__item[data-tone='vermilion'] .image-mosaic-section__image {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.32), transparent 36%),
+    repeating-linear-gradient(90deg, rgba(189, 47, 39, 0.075) 0 1px, transparent 1px 18px),
+    rgba(231, 223, 207, 0.34);
+}
+
+.image-mosaic-section__placeholder {
+  position: relative;
+  z-index: 1;
+  color: rgba(45, 42, 37, 0.62);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-size: clamp(34px, 4.8vw, 76px);
+  line-height: 0.92;
+}
+
+.image-mosaic-section__caption {
+  display: grid;
+  gap: 8px;
+  max-width: 42rem;
+  color: var(--ink-soft);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.58;
+}
+
+.image-mosaic-section__caption-meta {
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.school-page__places .symbol-section__custom {
+  height: 100%;
+}
+
+.school-constellation {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+}
+
+.school-constellation__axis {
+  position: absolute;
+  top: 12%;
+  bottom: 12%;
+  left: 50%;
+  width: 1px;
+  background: rgba(164, 119, 49, 0.5);
+  transform: translateX(-50%) rotate(28deg);
+}
+
+.school-constellation__point,
+.school-constellation__label {
+  position: absolute;
+  display: block;
+}
+
+.school-constellation__point {
+  width: 18px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--vermilion);
+  box-shadow: 0 0 24px rgba(189, 47, 39, 0.22);
+}
+
+.school-constellation__point--primary {
+  top: 24%;
+  left: 58%;
+}
+
+.school-constellation__point--secondary {
+  top: 52%;
+  left: 38%;
+  background: var(--teal);
+  box-shadow: 0 0 24px rgba(74, 130, 124, 0.22);
+}
+
+.school-constellation__point--tertiary {
+  top: 72%;
+  left: 64%;
+  background: var(--gold);
+  box-shadow: 0 0 24px rgba(164, 119, 49, 0.2);
+}
+
+.school-constellation__label {
+  padding-top: 10px;
+  border-top: 1px solid rgba(164, 119, 49, 0.34);
+  color: var(--ink-soft);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.school-constellation__label--primary {
+  top: 23%;
+  left: 66%;
+}
+
+.school-constellation__label--secondary {
+  top: 50%;
+  right: 66%;
+}
+
+.school-constellation__label--tertiary {
+  top: 70%;
+  left: 72%;
+}
+
+.school-locations__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.58fr) minmax(420px, 1fr);
+  gap: clamp(48px, 7vw, 120px);
+  align-items: start;
+}
+
+.school-locations__header {
+  position: sticky;
+  top: 132px;
+}
+
+.school-locations__header::after {
+  display: block;
+  width: min(100%, 520px);
+  height: 1px;
+  margin-top: clamp(28px, 4vw, 48px);
+  background: linear-gradient(90deg, var(--vermilion), rgba(164, 119, 49, 0.68), transparent);
+  content: '';
+}
+
+.school-locations__eyebrow {
+  margin-bottom: 26px;
+}
+
+.school-locations__list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(164, 119, 49, 0.34);
+}
+
+.school-locations__item {
+  display: grid;
+  grid-template-columns: minmax(48px, 0.12fr) minmax(0, 1fr) minmax(190px, 0.32fr);
+  gap: clamp(22px, 3.2vw, 54px);
+  align-items: start;
+  padding: clamp(28px, 4vw, 54px) 0;
+  border-bottom: 1px solid rgba(164, 119, 49, 0.26);
+}
+
+.school-locations__number {
+  color: var(--gold);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-size: clamp(30px, 3.4vw, 52px);
+  line-height: 0.9;
+}
+
+.school-locations__status,
+.school-locations__detail {
+  margin: 0;
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.school-locations__copy h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-size: clamp(34px, 4.2vw, 62px);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: 0;
+}
+
+.school-locations__copy p:not(.school-locations__status) {
+  max-width: 620px;
+  margin: 16px 0 0;
+  color: var(--ink-soft);
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.62;
+}
+
+.school-locations__detail {
+  justify-self: end;
+  max-width: 210px;
+  color: var(--gold);
+  text-align: right;
+}
+
+.school-pathway__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.56fr) minmax(520px, 1fr);
+  gap: clamp(48px, 7vw, 120px);
+  align-items: center;
+}
+
+.school-pathway__header::after,
+.school-evening__copy::after {
+  display: block;
+  width: min(100%, 520px);
+  height: 1px;
+  margin-top: clamp(28px, 4vw, 48px);
+  background: linear-gradient(90deg, var(--vermilion), rgba(164, 119, 49, 0.68), transparent);
+  content: '';
+}
+
+.school-pathway__eyebrow,
+.school-evening__eyebrow {
+  margin-bottom: 26px;
+}
+
+.school-pathway__header > p:not(.school-pathway__eyebrow),
+.school-evening__copy > p:not(.school-evening__eyebrow) {
+  max-width: 680px;
+  margin: clamp(28px, 4vw, 46px) 0 0;
+  color: var(--ink-soft);
+  font-size: clamp(17px, 1.35vw, 21px);
+  line-height: 1.72;
+}
+
+.school-evening__copy > p + p {
+  margin-top: 1.1em;
+}
+
+.school-pathway__diagram {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(70px, 0.18fr) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.school-pathway__phase {
+  position: relative;
+  display: grid;
+  align-content: start;
+  min-height: 420px;
+  padding: clamp(28px, 3.4vw, 48px);
+  border: 1px solid rgba(164, 119, 49, 0.3);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.school-pathway__phase::after {
+  position: absolute;
+  right: clamp(22px, 2.4vw, 36px);
+  bottom: clamp(22px, 2.4vw, 36px);
+  left: clamp(22px, 2.4vw, 36px);
+  height: 1px;
+  background: linear-gradient(90deg, var(--vermilion), rgba(164, 119, 49, 0.58), transparent);
+  content: '';
+}
+
+.school-pathway__phase--advanced::after {
+  background: linear-gradient(90deg, var(--teal), rgba(164, 119, 49, 0.58), transparent);
+}
+
+.school-pathway__phase-number {
+  display: grid;
+  place-items: center;
+  width: clamp(68px, 7vw, 104px);
+  aspect-ratio: 1;
+  margin-bottom: clamp(44px, 7vw, 88px);
+  border: 1px solid rgba(164, 119, 49, 0.42);
+  color: var(--gold);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-size: clamp(44px, 5.2vw, 82px);
+  line-height: 0.9;
+}
+
+.school-pathway__phase-meta {
+  margin: 0 0 12px;
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.school-pathway__phase h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-size: clamp(34px, 4vw, 58px);
+  font-weight: 400;
+  line-height: 0.96;
+}
+
+.school-pathway__phase p:not(.school-pathway__phase-meta) {
+  margin: 18px 0 0;
+  color: var(--ink-soft);
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.62;
+}
+
+.school-pathway__passage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 70px;
+}
+
+.school-pathway__passage::before,
+.school-pathway__passage::after,
+.school-pathway__passage span {
+  content: '';
+  display: block;
+}
+
+.school-pathway__passage::before {
+  width: 100%;
+  height: 1px;
+  background: rgba(164, 119, 49, 0.56);
+}
+
+.school-pathway__passage::after {
+  position: absolute;
+  right: 0;
+  width: 12px;
+  aspect-ratio: 1;
+  border-top: 1px solid rgba(164, 119, 49, 0.62);
+  border-right: 1px solid rgba(164, 119, 49, 0.62);
+  transform: rotate(45deg);
+}
+
+.school-pathway__passage span {
+  position: absolute;
+  width: 26px;
+  aspect-ratio: 1;
+  border: 1px solid rgba(189, 47, 39, 0.45);
+  background: rgba(251, 250, 244, 0.86);
+  transform: rotate(45deg);
+}
+
+.school-evening__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.68fr) minmax(420px, 0.78fr);
+  gap: clamp(48px, 7vw, 120px);
+  align-items: start;
+}
+
+.school-evening__copy {
+  position: sticky;
+  top: 132px;
+}
+
+.school-evening__sequence {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(164, 119, 49, 0.34);
+}
+
+.school-evening__step {
+  display: grid;
+  grid-template-columns: minmax(58px, 0.14fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 46px);
+  padding: clamp(28px, 3.8vw, 52px) 0;
+  border-bottom: 1px solid rgba(164, 119, 49, 0.26);
+}
+
+.school-evening__step-time {
+  display: grid;
+  place-items: center;
+  width: clamp(54px, 5.2vw, 78px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(164, 119, 49, 0.42);
+  color: var(--gold);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-size: clamp(26px, 3vw, 44px);
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.school-evening__step h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-size: clamp(32px, 4vw, 58px);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.school-evening__step p {
+  max-width: 620px;
+  margin: 14px 0 0;
+  color: var(--ink-soft);
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.62;
+}
+
 .sigil-column {
   position: relative;
   grid-area: sigil;
@@ -1973,6 +2558,10 @@ a.chapter-grid__item:focus-visible::after {
   .symbol-section *,
   .timeline-section *,
   .chapter-grid *,
+  .image-mosaic-section *,
+  .school-locations *,
+  .school-pathway *,
+  .school-evening *,
   .sigil-core {
     animation: none;
     transition: none;
@@ -2063,6 +2652,13 @@ a.chapter-grid__item:focus-visible::after {
   }
 
   .chapter-grid {
+    padding: clamp(72px, 11vw, 104px) 0;
+  }
+
+  .image-mosaic-section,
+  .school-locations,
+  .school-pathway,
+  .school-evening {
     padding: clamp(72px, 11vw, 104px) 0;
   }
 
@@ -2160,6 +2756,71 @@ a.chapter-grid__item:focus-visible::after {
 
   .chapter-grid__inner {
     width: min(100% - 34px, 760px);
+  }
+
+  .image-mosaic-section__inner,
+  .school-locations__inner,
+  .school-pathway__inner,
+  .school-evening__inner {
+    width: min(100% - 34px, 760px);
+  }
+
+  .image-mosaic-section__header,
+  .school-locations__inner,
+  .school-pathway__inner,
+  .school-evening__inner {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .image-mosaic-section__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .image-mosaic-section__item[data-variant='large'] {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .school-locations__header,
+  .school-evening__copy {
+    position: relative;
+    top: auto;
+  }
+
+  .school-locations__item {
+    grid-template-columns: 58px minmax(0, 1fr);
+  }
+
+  .school-locations__detail {
+    grid-column: 2;
+    justify-self: start;
+    max-width: none;
+    text-align: left;
+  }
+
+  .school-pathway__diagram {
+    grid-template-columns: 1fr;
+  }
+
+  .school-pathway__phase {
+    min-height: 320px;
+  }
+
+  .school-pathway__passage {
+    min-height: 70px;
+    min-width: 0;
+  }
+
+  .school-pathway__passage::before {
+    width: 1px;
+    height: 100%;
+  }
+
+  .school-pathway__passage::after {
+    right: auto;
+    bottom: 0;
+    transform: rotate(135deg);
   }
 
   .chapter-grid__header {
@@ -2313,6 +2974,17 @@ a.chapter-grid__item:focus-visible::after {
       linear-gradient(112deg, var(--paper) 0%, #f8f2e7 54%, var(--paper-soft) 100%);
   }
 
+  .image-mosaic-section,
+  .school-locations,
+  .school-pathway,
+  .school-evening {
+    padding: 64px 0;
+    background:
+      linear-gradient(90deg, rgba(189, 47, 39, 0.14) 0 1px, transparent 1px 100%) 18px 0 / 1px 100%
+        no-repeat,
+      linear-gradient(112deg, var(--paper) 0%, #f8f2e7 54%, var(--paper-soft) 100%);
+  }
+
   .editorial-section::after {
     inset: 12px;
   }
@@ -2334,6 +3006,13 @@ a.chapter-grid__item:focus-visible::after {
   }
 
   .chapter-grid::after {
+    inset: 12px;
+  }
+
+  .image-mosaic-section::after,
+  .school-locations::after,
+  .school-pathway::after,
+  .school-evening::after {
     inset: 12px;
   }
 
@@ -2577,6 +3256,194 @@ a.chapter-grid__item:focus-visible::after {
 
   .chapter-grid__inner {
     width: min(100% - 32px, 460px);
+  }
+
+  .image-mosaic-section__inner,
+  .school-locations__inner,
+  .school-pathway__inner,
+  .school-evening__inner {
+    width: min(100% - 32px, 460px);
+  }
+
+  .image-mosaic-section__header {
+    gap: 22px;
+    margin-bottom: 34px;
+  }
+
+  .image-mosaic-section__header::after {
+    margin-top: 2px;
+  }
+
+  .image-mosaic-section__meta {
+    gap: 12px;
+    margin-bottom: -8px;
+  }
+
+  .image-mosaic-section__number {
+    width: 34px;
+    font-size: 15px;
+  }
+
+  .image-mosaic-section__eyebrow,
+  .school-locations__eyebrow,
+  .school-pathway__eyebrow,
+  .school-evening__eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .image-mosaic-section__title,
+  .school-locations__title,
+  .school-pathway__title,
+  .school-evening__title {
+    font-size: clamp(42px, 14.5vw, 58px);
+    line-height: 0.94;
+  }
+
+  .image-mosaic-section__intro {
+    font-size: clamp(21px, 6vw, 27px);
+    line-height: 1.22;
+  }
+
+  .image-mosaic-section__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .image-mosaic-section__image,
+  .image-mosaic-section__item[data-variant='tall'] .image-mosaic-section__image,
+  .image-mosaic-section__item[data-variant='wide'] .image-mosaic-section__image {
+    min-height: clamp(220px, 66vw, 300px);
+  }
+
+  .image-mosaic-section__placeholder {
+    font-size: clamp(30px, 10vw, 44px);
+  }
+
+  .image-mosaic-section__caption {
+    font-size: 15px;
+    line-height: 1.54;
+  }
+
+  .image-mosaic-section__caption-meta {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .school-constellation {
+    min-height: 220px;
+  }
+
+  .school-constellation__point {
+    width: 14px;
+  }
+
+  .school-constellation__label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .school-locations__inner,
+  .school-pathway__inner,
+  .school-evening__inner {
+    gap: 30px;
+  }
+
+  .school-locations__eyebrow,
+  .school-pathway__eyebrow,
+  .school-evening__eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .school-locations__header::after,
+  .school-pathway__header::after,
+  .school-evening__copy::after {
+    margin-top: 24px;
+  }
+
+  .school-locations__item {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 16px;
+    padding: 24px 0;
+  }
+
+  .school-locations__number {
+    font-size: 28px;
+  }
+
+  .school-locations__status,
+  .school-locations__detail {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .school-locations__copy h3 {
+    font-size: clamp(27px, 8.6vw, 38px);
+    line-height: 1;
+  }
+
+  .school-locations__copy p:not(.school-locations__status) {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.54;
+  }
+
+  .school-pathway__header > p:not(.school-pathway__eyebrow),
+  .school-evening__copy > p:not(.school-evening__eyebrow) {
+    margin-top: 22px;
+    font-size: 16px;
+    line-height: 1.62;
+  }
+
+  .school-pathway__phase {
+    min-height: 280px;
+    padding: 24px;
+  }
+
+  .school-pathway__phase-number {
+    width: 68px;
+    margin-bottom: 42px;
+    font-size: 44px;
+  }
+
+  .school-pathway__phase-meta {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .school-pathway__phase h3 {
+    font-size: 32px;
+  }
+
+  .school-pathway__phase p:not(.school-pathway__phase-meta) {
+    font-size: 15px;
+    line-height: 1.54;
+  }
+
+  .school-pathway__passage {
+    min-height: 58px;
+  }
+
+  .school-evening__step {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 16px;
+    padding: 24px 0;
+  }
+
+  .school-evening__step-time {
+    width: 52px;
+    font-size: 26px;
+  }
+
+  .school-evening__step h3 {
+    font-size: clamp(27px, 8.6vw, 38px);
+    line-height: 1;
+  }
+
+  .school-evening__step p {
+    margin-top: 9px;
+    font-size: 15px;
+    line-height: 1.54;
   }
 
   .chapter-grid__header {
