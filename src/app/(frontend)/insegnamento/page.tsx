@@ -10,51 +10,51 @@ import Link from 'next/link'
 const principleItems = [
   {
     description:
-      "La capacita di dirigere lo sguardo verso cio che accade, senza fuggire nell'automatismo.",
+      "Il lavoro di osservazione, comprensione e dissoluzione degli aggregati psicologici che oscurano l'Essenza.",
     number: 'I',
-    title: 'Attenzione',
+    title: "Morte dell'ego",
   },
   {
     description:
-      "Una qualita diversa dell'essere, in cui corpo, pensiero ed emozione vengono percepiti insieme.",
+      'La nascita di una vita interiore rigenerata, capace di dare forma cosciente alle energie piu profonde.',
     number: 'II',
-    title: 'Presenza',
+    title: 'Seconda nascita',
   },
   {
     description:
-      "L'atto interiore attraverso cui l'uomo non osserva soltanto il mondo, ma ricorda di essere presente mentre osserva.",
+      "Il servizio disinteressato: portare il lavoro oltre se stessi e orientarlo al bene dell'umanita.",
     number: 'III',
-    title: 'Ricordo di se',
+    title: "Sacrificio per l'umanita",
   },
   {
     description:
-      'Uno sforzo intenzionale, non meccanico, orientato alla trasformazione della propria qualita di attenzione.',
+      "La capacita di vedere pensieri, emozioni e impulsi nel momento in cui sorgono, senza giustificarli.",
     number: 'IV',
-    title: 'Lavoro cosciente',
+    title: 'Auto-osservazione',
   },
   {
     description:
-      'Il passaggio da una vita reattiva e dispersa a una forma piu integra e consapevole di esistenza.',
+      "Il principio cosciente che puo risvegliarsi quando l'ego perde forza e l'uomo smette di vivere meccanicamente.",
     number: 'V',
-    title: 'Trasformazione',
+    title: 'Essenza',
   },
 ]
 
 const chapters = [
   {
-    description: "La figura attraverso cui l'insegnamento prende forma e viene trasmesso.",
+    description: "La figura attraverso cui l'insegnamento prende forma, orientamento e trasmissione.",
     href: '#',
     number: '01',
     title: 'Il Maestro',
   },
   {
-    description: 'Il luogo del lavoro condiviso, della disciplina e della trasmissione.',
+    description: "Il luogo in cui l'auto-osservazione, lo studio e la disciplina vengono sostenuti insieme.",
     href: '#',
     number: '02',
     title: 'La Scuola',
   },
   {
-    description: 'Una soglia per avvicinarsi, chiedere informazioni o iniziare un dialogo.',
+    description: "Una soglia per avvicinarsi all'insegnamento, chiedere informazioni o iniziare un dialogo.",
     href: '#',
     number: '03',
     title: 'Contatti',
@@ -83,33 +83,33 @@ export default function TeachingPage() {
       <EditorialSection
         className="teaching-page__hero"
         eyebrow="FRAMMENTO SECONDO"
-        title="L'insegnamento"
-        intro="Un percorso di conoscenza interiore fondato sull'attenzione, sulla presenza e sul lavoro cosciente su di se."
-        body="L'insegnamento non si presenta come una teoria da accumulare, ma come una pratica da verificare nell'esperienza diretta. Ogni idea diventa reale solo quando viene osservata nella vita quotidiana, nel corpo, nelle emozioni e nel pensiero."
-        secondaryBody="Il lavoro interiore comincia dal riconoscere la propria frammentazione: automatismi, identificazioni, reazioni meccaniche. Da questa osservazione puo nascere una forma diversa di presenza."
+        title="Cosa sono i Tre Fattori"
+        intro="Nell'insegnamento di Samael Aun Weor, i Tre Fattori sono l'asse pratico della Rivoluzione della Coscienza."
+        body="Non sono idee da contemplare, ma tre direzioni da vivere: morire psicologicamente all'ego, nascere a una vita interiore rigenerata, sacrificarsi per l'umanita attraverso un servizio disinteressato."
+        secondaryBody="Il primo fattore apre il lavoro: vedere e comprendere gli aggregati psicologici che agiscono in noi. Senza questa morte interiore, la conoscenza rimane teoria; con essa, l'Essenza puo iniziare a liberarsi dalla meccanicita."
       />
 
       <SymbolSection
-        eyebrow="IL METODO"
-        title="Osservare, ricordare, trasformare"
-        body="Il metodo non chiede di credere, ma di osservare. Attraverso l'attenzione intenzionale, il ricordo di se e il confronto con la propria meccanicita, l'uomo puo iniziare a distinguere cio che in lui e automatico da cio che e realmente cosciente."
+        eyebrow="EGO ED ESSENZA"
+        title="Cos'e l'Ego e l'Essenza"
+        body="L'Ego e l'insieme degli aggregati psicologici: desideri, paure, identificazioni, orgoglio, abitudini e reazioni che parlano in noi come se fossero il nostro vero essere. L'Essenza, invece, e il principio cosciente, semplice e reale, normalmente oscurato da questa molteplicita interiore."
         symbolPosition="right"
-        symbolVariant="threshold"
+        symbolVariant="essence"
       />
 
       <QuoteSection
         eyebrow="PRINCIPIO"
-        quote="Non si tratta di diventare altro, ma di vedere cio che gia agisce in noi."
-        source="Appunto di lavoro"
+        quote="La trasformazione comincia quando l'uomo distingue cio che e coscienza da cio che e automatismo."
+        source="Sintesi di lavoro"
         fragmentNumber="II"
       />
 
-      <IndexSection eyebrow="PRINCIPI" title="Indice del lavoro" items={principleItems} />
+      <IndexSection eyebrow="PRINCIPI" title="Asse del lavoro interiore" items={principleItems} />
 
       <ChapterGrid
         eyebrow="CONTINUARE IL PERCORSO"
         title="Altri frammenti"
-        intro="L'insegnamento puo essere avvicinato da piu soglie: la figura del maestro, la pratica, la scuola e il contatto diretto con il lavoro."
+        intro="Dai Tre Fattori si aprono le altre soglie dell'insegnamento: la guida del maestro, il lavoro condiviso nella scuola e il contatto diretto con la pratica."
         chapters={chapters}
       />
     </div>
