@@ -2339,8 +2339,8 @@ a.chapter-grid__item:focus-visible::after {
 }
 
 .essence-sigil::after {
-  top: 66%;
-  height: 9%;
+  top: 55%;
+  height: 20%;
 }
 
 .essence-sigil::before,
@@ -2425,15 +2425,15 @@ a.chapter-grid__item:focus-visible::after {
 }
 
 .home-page[data-active-shape='square'] {
-  --sigil-core-y: 86%;
+  --sigil-core-y: 87%;
 }
 
 .home-page[data-active-shape='triangle'] {
-  --sigil-core-y: 55%;
+  --sigil-core-y: 54%;
 }
 
 .home-page[data-active-shape='circle'] {
-  --sigil-core-y: 15%;
+  --sigil-core-y: 13.5%;
 }
 
 .home-page[data-active-shape='burst'] {

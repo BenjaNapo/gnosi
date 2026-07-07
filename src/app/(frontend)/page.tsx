@@ -18,25 +18,25 @@ const fragments = [
     kicker: 'Frammento primo',
     shape: 'square',
     text: "La conoscenza non si conquista: si ricorda. Nel silenzio della forma, il punto interiore si accende e orienta l'ascesa dalla materia allo spirito.",
-    title: "L'Essenza",
+    title: 'Gli Ego',
   },
   {
     kicker: 'Frammento secondo',
     shape: 'triangle',
-    text: "La forma custodisce il movimento. Ogni lato apre una direzione, ogni vertice raccoglie cio che era disperso e lo conduce verso un centro piu sottile.",
-    title: 'La Forma',
+    text: 'La forma custodisce il movimento. Ogni lato apre una direzione, ogni vertice raccoglie cio che era disperso e lo conduce verso un centro piu sottile.',
+    title: 'Le Cause',
   },
   {
     kicker: 'Frammento terzo',
     shape: 'circle',
-    text: "Quando il percorso si compie, il segno torna intero. Il cerchio non chiude: contiene, protegge e lascia risuonare cio che e stato riconosciuto.",
-    title: 'Il Cerchio',
+    text: 'Quando il percorso si compie, il segno torna intero. Il cerchio non chiude: contiene, protegge e lascia risuonare cio che e stato riconosciuto.',
+    title: "L'Essenza",
   },
   {
     kicker: 'Frammento quarto',
     shape: 'burst',
-    text: "Nel punto che si apre, la forma non resiste piu. La luce attraversa ogni margine, rischiara la pagina e restituisce al bianco cio che era velato.",
-    title: 'La Luce',
+    text: 'Nel punto che si apre, la forma non resiste piu. La luce attraversa ogni margine, rischiara la pagina e restituisce al bianco cio che era velato.',
+    title: 'Risveglio',
   },
 ] as const
 
