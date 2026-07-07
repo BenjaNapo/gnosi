@@ -1098,16 +1098,18 @@ main {
 }
 
 .symbol-section__square {
-  bottom: 1%;
+  top: 50%;
   left: 50%;
-  width: 36%;
+  width: 48%;
   aspect-ratio: 1;
-  border: 2px solid rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(17, 15, 13, 0.86);
   background:
-    radial-gradient(circle at 50% 50%, rgba(189, 47, 39, 0.14), transparent 58%),
-    rgba(251, 250, 244, 0.8);
-  box-shadow: 0 0 0 1px rgba(164, 119, 49, 0.42);
-  transform: translateX(-50%);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 34%),
+    rgba(6, 6, 5, 0.96);
+  box-shadow:
+    0 0 0 1px rgba(164, 119, 49, 0.18),
+    inset 0 0 34px rgba(0, 0, 0, 0.55);
+  transform: translate(-50%, -50%);
 }
 
 .symbol-section__point {
@@ -1125,6 +1127,15 @@ main {
   transition:
     opacity 260ms ease,
     transform 420ms ease;
+}
+
+.symbol-section__diagram[data-symbol-variant='essence'] .symbol-section__point {
+  width: 22%;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow:
+    0 0 18px rgba(255, 255, 255, 0.94),
+    0 0 48px rgba(255, 255, 255, 0.56),
+    0 0 86px rgba(255, 255, 255, 0.3);
 }
 
 .symbol-section__axis {

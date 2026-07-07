@@ -26,18 +26,6 @@ const principleItems = [
     number: 'III',
     title: "Sacrificio per l'umanita",
   },
-  {
-    description:
-      "La capacita di vedere pensieri, emozioni e impulsi nel momento in cui sorgono, senza giustificarli.",
-    number: 'IV',
-    title: 'Auto-osservazione',
-  },
-  {
-    description:
-      "Il principio cosciente che puo risvegliarsi quando l'ego perde forza e l'uomo smette di vivere meccanicamente.",
-    number: 'V',
-    title: 'Essenza',
-  },
 ]
 
 const chapters = [
@@ -83,15 +71,17 @@ export default function TeachingPage() {
       <EditorialSection
         className="teaching-page__hero"
         eyebrow="FRAMMENTO SECONDO"
-        title="Cosa sono i Tre Fattori"
+        title="Un lavoro rivoluzionario"
         intro="Nell'insegnamento di Samael Aun Weor, i Tre Fattori sono l'asse pratico della Rivoluzione della Coscienza."
         body="Non sono idee da contemplare, ma tre direzioni da vivere: morire psicologicamente all'ego, nascere a una vita interiore rigenerata, sacrificarsi per l'umanita attraverso un servizio disinteressato."
         secondaryBody="Il primo fattore apre il lavoro: vedere e comprendere gli aggregati psicologici che agiscono in noi. Senza questa morte interiore, la conoscenza rimane teoria; con essa, l'Essenza puo iniziare a liberarsi dalla meccanicita."
       />
 
+      <IndexSection eyebrow="PRINCIPI" title="I Tre Fattori" items={principleItems} />
+
       <SymbolSection
         eyebrow="EGO ED ESSENZA"
-        title="Cos'e l'Ego e l'Essenza"
+        title="Ego ed Essenza"
         body="L'Ego e l'insieme degli aggregati psicologici: desideri, paure, identificazioni, orgoglio, abitudini e reazioni che parlano in noi come se fossero il nostro vero essere. L'Essenza, invece, e il principio cosciente, semplice e reale, normalmente oscurato da questa molteplicita interiore."
         symbolPosition="right"
         symbolVariant="essence"
@@ -103,8 +93,6 @@ export default function TeachingPage() {
         source="Sintesi di lavoro"
         fragmentNumber="II"
       />
-
-      <IndexSection eyebrow="PRINCIPI" title="Asse del lavoro interiore" items={principleItems} />
 
       <ChapterGrid
         eyebrow="CONTINUARE IL PERCORSO"

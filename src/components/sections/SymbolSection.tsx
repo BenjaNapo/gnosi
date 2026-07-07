@@ -25,8 +25,6 @@ const renderSymbol = (variant: SymbolSectionVariant) => {
     <div className="symbol-section__diagram" data-symbol-variant={variant}>
       {variant === 'essence' && (
         <>
-          <span className="symbol-section__circle" />
-          <span className="symbol-section__triangle" />
           <span className="symbol-section__square" />
           <span className="symbol-section__point" />
         </>
