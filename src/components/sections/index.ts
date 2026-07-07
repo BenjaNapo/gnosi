@@ -12,3 +12,5 @@ export type {
   SymbolSectionProps,
   SymbolSectionVariant,
 } from './SymbolSection'
+export { TimelineSection } from './TimelineSection'
+export type { TimelineSectionItem, TimelineSectionProps } from './TimelineSection'

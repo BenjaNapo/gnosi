@@ -31,19 +31,19 @@ const principleItems = [
 const chapters = [
   {
     description: "La figura attraverso cui l'insegnamento prende forma, orientamento e trasmissione.",
-    href: '#',
+    href: '/maestro',
     number: '01',
     title: 'Il Maestro',
   },
   {
     description: "Il luogo in cui l'auto-osservazione, lo studio e la disciplina vengono sostenuti insieme.",
-    href: '#',
+    href: '/scuola',
     number: '02',
     title: 'La Scuola',
   },
   {
     description: "Una soglia per avvicinarsi all'insegnamento, chiedere informazioni o iniziare un dialogo.",
-    href: '#',
+    href: '/contatti',
     number: '03',
     title: 'Contatti',
   },
@@ -62,9 +62,9 @@ export default function TeachingPage() {
           <Link aria-current="page" href="/insegnamento">
             L&apos;Insegnamento
           </Link>
-          <a href="#">Il Maestro</a>
-          <a href="#">La Scuola</a>
-          <a href="#">Contatti</a>
+          <Link href="/maestro">Il Maestro</Link>
+          <Link href="/scuola">La Scuola</Link>
+          <Link href="/contatti">Contatti</Link>
         </div>
       </nav>
 
