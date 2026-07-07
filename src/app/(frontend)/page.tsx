@@ -4,7 +4,7 @@ import gsap from 'gsap'
 import type { TouchEvent } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-const navItems = ['Home', 'Gnosi', 'Le Sedi', 'Contatti']
+const navItems = ['Home', "L'Insegnamento", 'Il Maestro', 'La Scuola', 'Contatti']
 
 const fragments = [
   {
